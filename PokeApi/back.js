@@ -1,17 +1,21 @@
 const pokedex = require('pokedex-promise-v2')
 const P = new pokedex();
 
+const { sendE } = require('../mixins/response-mixins')
+
 const getPokemon = (req,res) =>{
 
-  P.getPokemonByName('1')
-  .then(function(response) {
-    res.send(response.name)
+  //ultimo pokemon valido: 802
+  P.getPokemonByName('8')
+
+  .then((response) => {
+    res.send(response.name);
   })
-  /* .then((response)=>{
-    res.send(response.id)
-  }) */
-  .catch(function(error) {
-    console.log('There was an ERROR: ', error);
+  .catch((responseError) => {
+    //console.log(`Código del error: ${res.response.status}\n${res.response.statusText}`);
+    sendE(res, 404, 'El pokemon aún no nace :(')
+    //res.send(res.response.status)
+
   });
 
 }
