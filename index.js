@@ -7,6 +7,12 @@ const poke = require('./PokeApi/back');
 
 const port = process.env.PORT || 6001;
 
+/* const proxyurl = "https://cors-anywhere.herokuapp.com/";
+const url = "http://localhost:6001/"; // site that doesn’t send Access-Control-*
+fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+.then(response => response.text())
+.then(contents => console.log(contents))
+.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?")) */
 
 app.get('/', (req, res) => res.send('Back funcionando'));
 
