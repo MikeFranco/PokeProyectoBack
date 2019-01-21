@@ -14,10 +14,26 @@ fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
 .then(contents => console.log(contents))
 .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?")) */
 
-app.get('/', (req, res) => res.send('Back funcionando'));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.get('/', function(req, res, next) {
+  res.send('Backend Funcionando')
+});
+
+app.get('/1', function(req, res, next) {
+ // Handle the post for this route
+ res.send('Esto también funciona')
+});
+
+//app.get('/', (req, res) => res.send('Back funcionando'));
 
 app.route('/prueba')
-  .get(poke.getPokemon);
+  .get(poke.getPokemon)
 
 app.listen(port, () => console.log(`Corriendo el back en: ${port}`));
 
