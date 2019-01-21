@@ -11,12 +11,18 @@ const getPokemon = (req,res) =>{
 
   .then((response) => {
     const number = Math.round(Math.random()*10)
-    res.send([
+    res.send({
+      image: `${response.sprites.front_default}`,
+      id: `${response.id}`,
+      name: `${response.name}`,
+      move: `${response.moves[number].move.name}`
+    })
+     /* res.send([
       {image: `${response.sprites.front_default}`},
       {id: `${response.id}`},
       {name: `${response.name}`},
       {move: `${response.moves[number].move.name}`}
-    ])  
+    ]) */
 
   })
   .catch((responseError) => {
