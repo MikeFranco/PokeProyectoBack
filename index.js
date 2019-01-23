@@ -1,9 +1,6 @@
 // Librerías
 const app = require('express')();
-//const pokedex = require('pokedex-promise-v2');
 const bodyParser = require('body-parser');
-const cors = require('cors')
-
 app.use(bodyParser.json());
 
 //Rutas
@@ -22,13 +19,10 @@ app.get('/', function(req, res, next) {
 });
 
 app.route('/verpokemones')
-  //.get(unPoke.getID)
   .post(unPoke.getPokemon)
-  //.post(unPoke.getID)
 
 app.route('/pokemonEspec')
-  .get(unPoke.getID)
-  .post(unPoke.respBack)
+  .get(unPoke.getID, unPoke.respBack)
   
 app.listen(port, () => console.log(`Corriendo el back en: ${port}`));
 
