@@ -26,7 +26,7 @@ const getPokemon = (req,res) =>{
 
 }
 
-
+const back = ''
 const getID = (req, res) => {
   const { id } = req.query
   const newid = Number(id)
@@ -58,6 +58,7 @@ const respBack = (newid, res) => {
     ID: ${response.id}
     move: ${response.moves[number].move.name}
     `)
+    //return back = response
     res.send({
       image: `${response.sprites.front_default}`,
       id: `${response.id}`,
