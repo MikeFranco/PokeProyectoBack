@@ -1,9 +1,14 @@
 // Librerías
 const app = require('express')();
-const pokedex = require('pokedex-promise-v2');
+//const pokedex = require('pokedex-promise-v2');
+const bodyParser = require('body-parser');
+const cors = require('cors')
+
+app.use(bodyParser.json());
 
 //Rutas
-const poke = require('./PokeApi/back');
+const unPoke = require('./PokeApi/getPokemon');
+const variosPokes = require('./PokeApi/pokemonList')
 const port = process.env.PORT || 6001;
 
 app.use(function(req, res, next) {
@@ -17,8 +22,14 @@ app.get('/', function(req, res, next) {
 });
 
 app.route('/verpokemones')
-  .get(poke.getPokemon)
-  .post(poke.pokemonList)
+  //.get(unPoke.getID)
+  .post(unPoke.getPokemon)
+  //.post(unPoke.getID)
+
+app.route('/pokemonEspec')
+  .get(unPoke.getID)
+  .post(unPoke.respBack)
+  
 app.listen(port, () => console.log(`Corriendo el back en: ${port}`));
 
 
