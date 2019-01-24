@@ -36,7 +36,7 @@ const respBack = (newid, res) => {
   P.getPokemonByName(newid)
   .then((respuesta) =>{
     console.log('Se hizo petición de ID específico');
-    
+
     res.send({
       image: `${respuesta.sprites.front_default}`,
       id: `${respuesta.id}`,
@@ -50,4 +50,5 @@ const respBack = (newid, res) => {
 
 }
 
-module.exports = { getPokemon, getID, respBack }
+
+module.exports = { getPokemon, getID, respBack}

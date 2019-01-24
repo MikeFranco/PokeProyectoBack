@@ -22,8 +22,11 @@ app.route('/verpokemones')
   .post(unPoke.getPokemon)
 
 app.route('/pokemonEspec')
-  .get(unPoke.getID, unPoke.respBack)
-  
+  .get(unPoke.getID)
+
+app.route('/pokemonIntervalo')
+  .get(variosPokes.pokemonList)
+
 app.listen(port, () => console.log(`Corriendo el back en: ${port}`));
 
 
