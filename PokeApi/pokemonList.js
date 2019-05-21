@@ -24,9 +24,9 @@ const listaPokes = (newid, cuantospokes, req, res) =>{
 }
 
 const getPokemon = (id, index, req,res) =>{
-  console.log('Este es el id dentro de getPOkemon', id);
+  console.log('Este es el id dentro de getPokemon', id);
 
-  return P.getPokemonByName(id)
+  return P.getPokemonByName(id+index)
   .then(response => {
     const number = id == 132 ? 0 : Math.round(Math.random()*(response.moves.length-1))
     const result = {
