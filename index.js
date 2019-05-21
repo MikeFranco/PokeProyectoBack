@@ -25,9 +25,9 @@ app.route('/pokemonEspec')
   .get(unPoke.getID)
 
 app.route('/pokemonIntervalo')
-  .get(variosPokes.pokemonList)
+  .get(variosPokes.getID)
 
-app.listen(port, () => console.log(`Corriendo el back en: ${port}`));
+app.listen(port, () => console.log(`Corriendo el back en el puerto: ${port}`));
 
 
 module.exports = { app };

@@ -3,52 +3,44 @@ const P = new pokedex();
 
 const { sendE } = require('../mixins/response-mixins')
 
-const pokemonList = (req,res)=>{
-  const interval0 = {
-   limit: 10,
-   offset: 34
- }
- console.log('Intervalo hardcodeado', interval0);
-
- const { elreq } = req;
- console.log('Intervalo del front:', elreq);
-
- P.getPokemonsList(interval0)
- .then((response)=>{
-   res.send(response)
-
- }).catch((responseError) => {
-   console.log(res);
-   sendE(res, 405, 'El pokemon aún no está registrado en el Pokedex :c </3')
- });
-}
-
-
-
 const getID = (req, res) => {
-  const { id } = req.query
+  console.log('Se hizo una peticion a la lista de pokemones')
+  const { id, limit } = req.query
   const newid = Number(id)
-  respBack(newid,res)
+  const cuantospokes = Number(limit)
+  listaPokes(newid, cuantospokes, req, res)
 
 }
 
-const respBack = (newid, res) => {
-  const number = newid == 132 ? 0 : Math.round(Math.random()*10);
-  P.getPokemonByName(newid)
-  .then((respuesta) =>{
-    console.log('Se hizo petición de ID específico');
+const listaPokes = (newid, cuantospokes, req, res) =>{
+  const promises = new Array(cuantospokes).fill(0).map((_,index,array) => getPokemon(newid, index, req, res))
 
-    res.send({
-      image: `${respuesta.sprites.front_default}`,
-      id: `${respuesta.id}`,
-      name: `${respuesta.name}`,
-      move: `${respuesta.moves[number].move.name}`
-    })
+  Promise.all(promises)
+  .then(response =>{
+    console.log('Se manda la info al front');
+    res.send(response)
   })
-  .catch((responseError) => {
-    sendE(res, 700, 'Error en la función del respBack')
-  });
-
+    .catch(error => res.send(error))
 }
 
-module.exports = { pokemonList, getID }
+const getPokemon = (id, index, req,res) =>{
+  console.log('Este es el id dentro de getPokemon', id);
+
+  return P.getPokemonByName(id+index)
+  .then(response => {
+    const number = id == 132 ? 0 : Math.round(Math.random()*(response.moves.length-1))
+    const result = {
+      image: `${response.sprites.front_default}`,
+      id: `${response.id}`,
+      name: `${response.name}`,
+      move: `${response.moves[number].move.name}`
+    }
+    return result
+
+  })
+  .catch(responseError => {
+    return responseError
+  });
+}
+
+module.exports = { listaPokes, getID }
