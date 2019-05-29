@@ -8,7 +8,6 @@ const getPokemonRandom = (req,res) => {
 
   P.getPokemonByName(id)
   .then(response => {
-    console.log("Se hizo una petición de Pokemón Random");
     res.send({
       image: `${response.sprites.front_default}`,
       id: `${response.id}`,
@@ -17,8 +16,8 @@ const getPokemonRandom = (req,res) => {
     })
 
   })
-  .catch(error => {
-    sendE(res, 404, 'El pokemon aún no está registrado en el Pokedex :c </3')
+  .catch(() => {
+    sendE(res, 404, 'El pokemon aún no está registrado en el Pokedex :c </3');
   });
 
 }
@@ -28,9 +27,7 @@ const getSpecificPokemon = (req, res) => {
   const numberId = Number(id);
   const number = numberId == 132 ? 0 : Math.round(Math.random()*10);
   P.getPokemonByName(numberId)
-  .then(response =>{
-    console.log('Se hizo petición de ID específico');
-
+  .then(response => {
     res.send({
       image: `${response.sprites.front_default}`,
       id: `${response.id}`,
@@ -39,11 +36,11 @@ const getSpecificPokemon = (req, res) => {
     })
 
   })
-  .catch(error => {
+
+  .catch(() => {
     sendE(res, 700, 'Error en la función del getSpecificPokemon')
   });
 
 }
-
 
 module.exports = { getPokemonRandom, getSpecificPokemon}
