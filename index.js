@@ -4,8 +4,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 //Rutas
-const unPoke = require('./PokeApi/getPokemon');
-const variosPokes = require('./PokeApi/pokemonList')
+const pokemonFunctions = require('./PokeApi/getPokemon');
 const port = process.env.PORT || 6001;
 
 app.use(function(req, res, next) {
@@ -14,20 +13,14 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/', function(req, res, next) {
-  res.send('Backend Funcionando')
-});
+app.get('/', (req, res) => res.send('Nothing to see here 👀 - PokeProyecto'));
 
-app.route('/verpokemones')
-  .post(unPoke.getPokemon)
+app.route('/get-random-pokemon')
+  .post(pokemonFunctions.getPokemonRandom)
 
-app.route('/pokemonEspec')
-  .get(unPoke.getID)
-
-app.route('/pokemonIntervalo')
-  .get(variosPokes.getID)
+app.route('/get-specific-pokemon')
+  .get(pokemonFunctions.getSpecificPokemon)
 
 app.listen(port, () => console.log(`Corriendo el back en el puerto: ${port}`));
-
 
 module.exports = { app };
