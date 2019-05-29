@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
 app.get('/', (req, res) => res.send('Nothing to see here 👀 - PokeProyecto'));
 
 app.route('/get-random-pokemon')
-  .post(pokemonFunctions.getPokemonRandom)
+  .get(pokemonFunctions.getPokemonRandom)
 
 app.route('/get-specific-pokemon')
   .get(pokemonFunctions.getSpecificPokemon)
