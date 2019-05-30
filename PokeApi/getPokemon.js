@@ -9,7 +9,11 @@ const getPokemonRandom = (req,res) => {
   P.getPokemonByName(id)
   .then(response => {
     res.send({
-      sprites: [`${response.sprites.front_default}`, `${response.sprites.back_default}` ],
+      sprites: [`${response.sprites.front_default}`,
+        `${response.sprites.back_default == null ? response.sprites.front_default : response.sprites.back_default }`,
+        `${response.sprites.front_shiny == null ? response.sprites.front_default : response.sprites.front_shiny }`,
+        `${response.sprites.back_shiny == null ? response.sprites.front_shiny : response.sprites.back_shiny }`
+       ],
       id: `${response.id}`,
       name: `${response.name}`,
       move: `${response.moves[number].move.name}`
@@ -29,7 +33,10 @@ const getSpecificPokemon = (req, res) => {
   P.getPokemonByName(numberId)
   .then(response => {
     res.send({
-      sprites: [`${response.sprites.front_default}`, `${response.sprites.back_default}` ],
+      sprites: [`${response.sprites.front_default}`,
+        `${response.sprites.back_default == null ? response.sprites.front_default : response.sprites.back_default }`,
+        `${response.sprites.front_shiny == null ? response.sprites.front_default : response.sprites.front_shiny }`,
+        `${response.sprites.back_shiny == null ? response.sprites.front_shiny : response.sprites.back_shiny }`],
       id: `${response.id}`,
       name: `${response.name}`,
       move: `${response.moves[number].move.name}`
