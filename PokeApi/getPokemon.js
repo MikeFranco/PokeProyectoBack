@@ -5,7 +5,7 @@ const { sendE } = require('../mixins/response-mixins');
 const getPokemonRandom = (req,res) => {
   const id = Math.round(Math.random()*802);
   const number = id == 132 ? 0 : Math.round(Math.random()*10);
-  //TODO Validar el id 650-802 porque solo tiene el sprite front
+
   P.getPokemonByName(id)
   .then(response => {
     res.send({
