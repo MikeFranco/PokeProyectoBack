@@ -16,10 +16,10 @@ app.use(function(req, res, next) {
 app.get('/', (req, res) => res.send('Nothing to see here 👀 - PokeProyecto'));
 
 app.route('/get-random-pokemon')
-  .get(pokemonFunctions.getPokemonRandom)
+  .get(pokemonFunctions.getPokemonRandom);
 
 app.route('/get-specific-pokemon')
-  .get(pokemonFunctions.getSpecificPokemon)
+  .get(pokemonFunctions.getSpecificPokemon);
 
 app.listen(port, () => console.log(`Corriendo el back en el puerto: ${port}`));
 
