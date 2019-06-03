@@ -3,7 +3,7 @@ const P = new pokedex();
 const { sendE } = require('../mixins/response-mixins');
 
 const getPokemonRandom = (req,res) => {
-  const id = Math.round(Math.random()*802);
+  const id = Math.round(Math.random() *802);
   const number = id == 132 ? 0 : Math.round(Math.random()*10);
 
   P.getPokemonByName(id)

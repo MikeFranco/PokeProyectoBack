@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 //Rutas
-const pokemonFunctions = require('./PokeApi/getPokemon');
+const pokemonFunctions = require('./functions/getPokemon');
 const port = process.env.PORT || 6001;
 
 app.use(function(req, res, next) {
